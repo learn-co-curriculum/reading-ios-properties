@@ -103,9 +103,13 @@ In order to declare a property, we start with the syntax `@property`. Pretty str
 
 Then we provide any attributes of this property in parentheses.
 
+#####`readwrite`/`readonly`
 We have already discussed the difference between public and private variables, but sometimes you would like a variable to be publically available for other classes to see, but not for other classes to be able to change. When this is the case we add `readonly` to the property attributes and we also redeclare the property in the `@interface` of our `.m` file with the `readwrite` attribute set. (If we do not have it set to `readwrite` in our `.m` file, no one will be able to set the value of the property!)
 
-Other attributes you will want to learn about in the future include: `atomic`, `weak`, `copy`, `unsafe_unretained`, and attributes to rename your getter and setter methods. However, as a beginner, let's stick with the standard `(strong, nonatomic)` attributes with the occasional `readonly`/`readwrite` added in.
+#####Other attributes
+Other attributes you will want to learn about in the future include: `atomic`, `weak`, `copy`, `unsafe_unretained`, and attributes to rename your getter and setter methods. 
+
+However, as a beginner, let's stick with the standard `(strong, nonatomic)` attributes with the occasional `readonly`/`readwrite` added in.
 
 ####Property type and name
 Finally, we tell the program what type the property is, and then give it a name. As you can see, we do not include an underscore before the name of the property. However if we access the instance variable within the property, it will by default, include the underscore. (We won't get into that here, but just know that if you see the underscore, you are again looking at an instance variable.)
