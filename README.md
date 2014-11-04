@@ -101,7 +101,7 @@ In order to declare a property, we start with the syntax `@property`. Pretty str
 
 ####Property attributes
 
-Then we provide any attributes of this property in parentheses. For now, let's stick with `(strong, nonatomic)` is it is the standard most beginners will need to use. But you should know about `readonly` and `readwrite`.
+Then we provide any attributes of this property in parentheses.
 
 We have already discussed the difference between public and private variables, but sometimes you would like a variable to be publically available for other classes to see, but not for other classes to be able to change. When this is the case we add `readonly` to the property attributes and we also redeclare the property in the `@interface` of our `.m` file with the `readwrite` attribute set. (If we do not have it set to `readwrite` in our `.m` file, no one will be able to set the value of the property!)
 
