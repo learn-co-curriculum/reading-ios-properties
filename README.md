@@ -1,9 +1,11 @@
 #Properties  
 
-###Private instance variables within a method (or with "local" scope)
+###Private instance variables within a method 
+####(or with "local" scope)
 Every variable we create within an instance method has been an "instance variable" by definition. It has "local" scope, because it is limited to being used within the method in which it has been created. In other words, if you were to try to access that variable in another method, even within the same class, the compiler would not recognize it, and your program would not run.
 
-###Private instance variables available to an entire class (or with "protected" scope)
+###Private instance variables available to an entire class 
+####(or with "protected" scope)
 But what if we want to share the information stored in a variable across multiple methods within a class? We could pass the variable from method to method via a method's arguments. However, this might get tedious quickly if the variable we wish to pass appears in many places.
 
 Fortunately, we are also able to add variables to our `@interface`, giving our instance variable "protected" scope, or scope across an entire instance of an object. If we add the variable to an `@interface` in our `.m` file, it will still be private. However, if we add the variable to an `@interface` our `.h` file, it will be public. As a reminder, public vs. private is really just another way to describe who can read and/or write to variables of a class and call methods of a class. When a variable is public, other classes have access to it. (But you'll have to read on to find out how to actually use a public variable in another class!)
@@ -30,7 +32,8 @@ Keep in mind: Instance variables with protected scope are held in memory until t
 
 
 
-###Public instance variables (or instance variables with "global" scope)
+###Public instance variables 
+####(or instance variables with "global" scope)
 
 So what if we want to access this variable from outside of the class? What if we want to set its state when something changes in another class? We can do that with "accessor" methods.
 
