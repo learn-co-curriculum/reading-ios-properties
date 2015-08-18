@@ -10,74 +10,21 @@
 
 ## The Usefulness of Properties
 
-When writing code, the real power of utilizing properties reveals itself in being able to write methods that can access values stored in properties without needing to receive those values as arguments. Did you notice in the Apples & Holidays lab that every one the "holiday" methods had to accept the dictionary as an argument? 
+When writing code, the real power of utilizing properties reveals itself in being able to write methods that can access values stored in properties without needing to receive those values as arguments. Do you recall from previous labs that we had to pass objects around as method arguments? It was a lot of repetition and we couldn't guarantee that the method would receive the same argument objects every time it was called. 
+
+By giving the class ownership of that object as a property we can then access it within a method implementation knowing that it will be the same object every time. Furthermore, we can anticipate that every instance of a given class will own an object associated with that property. We can then use those owned objects (properties) to distinguish or make behavioral decisions for the property's owner:
 
 ```objc
-// FISAppDelegate.h
+FISCar *marksCar = [[FISCar alloc] init];
+car.driver = @"Mark";
 
-@interface FISAppDelegate : UIResponder <UIApplicationDelegate>
-
-- (NSArray *)holidaysInSeason:(NSString *)season
-                   inDatabase:(NSDictionary *)database;
-
-- (NSArray *)suppliesInHoliday:(NSString *)holiday
-                      inSeason:(NSString *)season
-                    inDatabase:(NSDictionary *)database;
-
-- (BOOL)holiday:(NSString* )holiday
-     isInSeason:(NSString *)season
-     inDatabase:(NSDictionary *)database;
-
-- (BOOL)supply:(NSString *)supply
-   isInHoliday:(NSString *)holiday
-      inSeason:(NSString *)season
-    inDatabase:(NSDictionary *)database;
-
-- (NSDictionary *)addHoliday:(NSString *)holiday
-                    toSeason:(NSString *)season
-                  inDatabase:(NSDictionary *)database;
-
-- (NSDictionary *)addSupply:(NSString *)supply
-                  toHoliday:(NSString *)holiday
-                   inSeason:(NSString *)season
-                 inDatabase:(NSDictionary *)database;
-                 
-@end
+if ([car.driver isEqualToString:@"Mark"]) {
+    [car unlock];
+} else {
+    [car soundCarAlarm];
+}
 ```
-
-It would have been much easier to write those methods to access the dictionary as a property belonging to `FISAppDelegate`:
-
-```objc
-// FISAppDelegate.h
-
-@interface FISAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) NSDictionary *database;
-
-- (NSArray *)holidaysInSeason:(NSString *)season;
-
-- (NSArray *)suppliesInHoliday:(NSString *)holiday
-                      inSeason:(NSString *)season;
-
-- (BOOL)holiday:(NSString* )holiday
-     isInSeason:(NSString *)season;
-
-- (BOOL)supply:(NSString *)supply
-   isInHoliday:(NSString *)holiday
-      inSeason:(NSString *)season;
-
-- (void)addHoliday:(NSString *)holiday
-          toSeason:(NSString *)season;
-
-- (void)addSupply:(NSString *)supply
-        toHoliday:(NSString *)holiday
-         inSeason:(NSString *)season;
-
-@end 
-```
-Each of the methods could have accessed the `database` property from within their own implementations. Also, the test file would not have needed to be responsible for the `database` dictionary and the final two methods would not have needed to provide a return since the `database` dictionary would have been owned as a property by the `FISAppDelegate` instance.
-
-**Top-tip:** *It's standard practice to group all of the property declarations together and write them above the method declarations. Don't mix your property declarations with your method declarations.*
+This code snippet assumes a car instance object with a string property called `driver`. If the contents of the `driver` property matches the string submitted to the `isEqualToString:` method, then the `car` object will perform the custom `unlock` method, otherwise it will perform the custom `soundCarAlarm` method. As long as the `FISCar` class is defined with a string property called `driver` (and two custom methods called `unlock` and `soundCarAlarm`), this code snippet can be run on any instance object of the `FISCar` class because we can guarantee that it will own a string object called `driver`.
 
 ## Declaring Properties
 
@@ -103,6 +50,7 @@ Which, assuming that we have a `FISWarship` class, might be implemented like thi
 
 @end
 ```
+**Top-tip:** *It's standard practice to group all of the property declarations together and write them above the method declarations. Don't mix your property declarations with your method declarations.*
 
 Just like in a local scope, primitives are declared as properties **without** using a pointer reference noted with a `*` ("star"). Primitives are also declared as properties **without** the `strong` keyword, which notes the retention type.
 
