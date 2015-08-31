@@ -15,7 +15,7 @@ When writing code, the real power of utilizing properties reveals itself in bein
 By giving the class ownership of that object as a property we can then access it within a method implementation knowing that it will be the same object every time. Furthermore, we can anticipate that every instance of a given class will own an object associated with that property. We can then use those owned objects (properties) to distinguish or make behavioral decisions for the property's owner:
 
 ```objc
-FISCar *marksCar = [[FISCar alloc] init];
+FISCar *car = [[FISCar alloc] init];
 car.driver = @"Mark";
 
 if ([car.driver isEqualToString:@"Mark"]) {
