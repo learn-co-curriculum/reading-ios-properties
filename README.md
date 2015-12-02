@@ -105,3 +105,5 @@ Speed: 33 knots
 Full stop, aye!
 Speed: 0 knots
 ```
+
+<a href='https://learn.co/lessons/reading-ios-properties' data-visibility='hidden'>View this lesson on Learn.co</a>
